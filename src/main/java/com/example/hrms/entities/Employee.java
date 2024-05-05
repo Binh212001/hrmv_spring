@@ -1,20 +1,17 @@
 package com.example.hrms.entities;
+
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity
-
 @Data
-public class Employee implements UserDetails {
+public class Employee{
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,36 +32,22 @@ public class Employee implements UserDetails {
     private Long positionId;
     private String email;
     private String phoneNumber;
-    @Enumerated(value = EnumType.STRING)
-    private Role role;
+    private String image;
+
+
+   @ManyToMany
+   @JoinTable(
+            name = "employee_role",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> role;
     @PrePersist
     protected void onCreate() {
         this.fullName= this.firstName+ " "+this.lastName;
+        this.password = this.username;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
 }
 

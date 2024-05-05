@@ -14,7 +14,6 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long departmentId;
     private String departmentName;
-    @OneToMany
-    @JoinColumn(name = "employeeId")
+    @OneToMany(mappedBy = "employeeId")
     private List<Employee> employees;
 }
