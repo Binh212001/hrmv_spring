@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.Date;
 @Data
 public class ContractForm {
+    private Long contractId;
     private Long employeeId;
     private Date startDate;
     private Date endDate;

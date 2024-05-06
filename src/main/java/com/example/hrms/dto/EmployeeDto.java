@@ -30,4 +30,5 @@ public class EmployeeDto {
     private String phoneNumber;
     private  Long roleId;
     private  String imageUrl;
+    private  String roleName;
 }

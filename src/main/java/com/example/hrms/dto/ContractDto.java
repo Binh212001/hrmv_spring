@@ -4,12 +4,13 @@ import com.example.hrms.entities.Employee;
 import com.example.hrms.utils.BaseResponse;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
 @Data
-
-public class ContractDto  extends BaseResponse {
+@Builder
+public class ContractDto   {
     private Long contractId;
     private Employee employee;
     private Date startDate;

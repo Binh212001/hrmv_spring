@@ -7,8 +7,8 @@ import java.util.Date;
 @Data
 
 public class EmployeeForm {
+    private Long employeeId;
     private String username;
-    private String password;
     private String firstName;
     private String lastName;
     private String gender;
@@ -18,5 +18,6 @@ public class EmployeeForm {
     private Long positionId;
     private String email;
     private String phoneNumber;
+    private String image;
 
 }

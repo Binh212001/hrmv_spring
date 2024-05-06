@@ -1,13 +1,11 @@
 package com.example.hrms.controller;
 
 import com.example.hrms.dto.EmployeeDto;
+import com.example.hrms.form.EmployeeForm;
 import com.example.hrms.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,6 +46,35 @@ public class EmployeeController {
 
         try {
             List<EmployeeDto> e = employeeService.getEmployeeByFullName(fullName);
+            return ResponseEntity.ok().body(e);
+        }catch ( Exception e ) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/get/department")
+    public ResponseEntity getEmployeeAtDepartment(@RequestParam("departmentId") Long departmentId) {
+
+        try {
+            List<EmployeeDto> e = employeeService.getEmployeeAtDepartment(departmentId);
+            return ResponseEntity.ok().body(e);
+        }catch ( Exception e ) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    public  ResponseEntity create(@RequestBody EmployeeForm employeeForm){
+        try {
+            boolean e = employeeService.create(employeeForm);
+            return ResponseEntity.ok().body(e);
+        }catch ( Exception e ) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    public  ResponseEntity update(@RequestBody EmployeeForm employeeForm){
+        try {
+            boolean e = employeeService.update(employeeForm);
             return ResponseEntity.ok().body(e);
         }catch ( Exception e ) {
             return ResponseEntity.badRequest().body(e.getMessage());

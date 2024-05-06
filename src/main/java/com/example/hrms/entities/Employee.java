@@ -1,15 +1,17 @@
 package com.example.hrms.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Employee{
 
 

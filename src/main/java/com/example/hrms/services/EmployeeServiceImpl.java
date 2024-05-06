@@ -1,19 +1,25 @@
 package com.example.hrms.services;
 
 import com.example.hrms.dto.EmployeeDto;
+import com.example.hrms.entities.Department;
 import com.example.hrms.entities.Employee;
+import com.example.hrms.form.EmployeeForm;
+import com.example.hrms.repo.DepartmentRepo;
 import com.example.hrms.repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements  EmployeeService{
     @Autowired
     EmployeeRepo employeeRepo;
+    @Autowired
+    DepartmentRepo departmentRepo;
 
     @Override
     public List<EmployeeDto> getEmployees(Long roleId) throws Exception {
@@ -54,6 +60,53 @@ public class EmployeeServiceImpl implements  EmployeeService{
         }
     }
 
+    @Override
+    public List<EmployeeDto> getEmployeeAtDepartment(Long departmentId)  throws Exception {
+        try {
+            List<Object[]> results =  employeeRepo.findEmployeeAtDepartment(departmentId);
+            List<EmployeeDto> employeeDtos = results.stream()
+                    .map(obj -> ObjectToEmployeeDto(obj))
+                    .collect(Collectors.toList());
+            return  employeeDtos;
+        }catch (Exception e) {
+            throw  new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean create(EmployeeForm employeeForm) throws Exception {
+       try {
+           Employee e  = mapFormToEmployee(employeeForm);
+           employeeRepo.save(e);
+           return true;
+       }catch (Exception e){
+           throw  new Exception(e.getMessage());
+       }
+    }
+
+    @Override
+    public boolean update(EmployeeForm employeeForm) throws Exception {
+        try {
+            Optional<Employee> employee = employeeRepo.findById(employeeForm.getEmployeeId());
+            if (employee.isPresent()){
+                employee.get().setGender(employeeForm.getGender());
+                employee.get().setFirstName(employeeForm.getFirstName());
+                employee.get().setLastName(employeeForm.getLastName());
+                employee.get().setDateOfBirth(employeeForm.getDateOfBirth());
+                employee.get().setHireDate(employeeForm.getHireDate());
+                employee.get().setDepartmentId(employeeForm.getDepartmentId());
+                employee.get().setPositionId(employeeForm.getPositionId());
+                employee.get().setEmail(employeeForm.getEmail());
+                employee.get().setPhoneNumber(employeeForm.getPhoneNumber());
+                employee.get().setImage(employeeForm.getImage());
+                employeeRepo.save(employee.get());
+                return  true;
+            }
+            return  false;
+        }catch (Exception e) {throw  new Exception(e.getMessage());
+        }
+    }
+
 
     public  EmployeeDto ObjectToEmployeeDto(Object[] obj){
         return new EmployeeDto(
@@ -69,6 +122,7 @@ public class EmployeeServiceImpl implements  EmployeeService{
                 ,(String) obj[9]
                 ,( Long) obj[10]
                 ,( String) obj[11]
+                ,(String) obj[12]
         );
     }
 
@@ -89,5 +143,19 @@ public class EmployeeServiceImpl implements  EmployeeService{
                 .email(employee.getEmail())
                 .phoneNumber(employee.getPhoneNumber())
                 .build();
+    }
+
+    public  Employee mapFormToEmployee(EmployeeForm e){
+        Employee employee =new Employee();
+        employee.setFirstName(e.getFirstName());
+        employee.setLastName(e.getLastName());
+        employee.setGender(e.getGender());
+        employee.setDateOfBirth(e.getDateOfBirth());
+        employee.setHireDate(e.getHireDate());
+        employee.setDepartmentId(e.getDepartmentId());
+        employee.setPositionId(e.getPositionId());
+        employee.setEmail(e.getEmail());
+        employee.setPhoneNumber(e.getPhoneNumber());
+        return  employee;
     }
 }
