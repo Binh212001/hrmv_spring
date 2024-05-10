@@ -1,6 +1,6 @@
 package com.example.hrms.dto;
 
-import lombok.Value;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,10 +8,10 @@ import java.time.LocalDate;
 /**
  * DTO for {@link com.example.hrms.entities.LeaveTable}
  */
-@Value
+@Data
 public class LeaveTableDto implements Serializable {
-    Integer id;
-    EmployeeDto employee;
+    Long id;
+    String employeeName;
     String leaveType;
     LocalDate startDate;
     LocalDate endDate;

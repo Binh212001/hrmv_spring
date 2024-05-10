@@ -7,11 +7,13 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Entity
 @Table(name = "department")
-public class Department {
+public class Department implements Serializable {
     @Id
     @Column(name = "department_id", nullable = false)
     private Long id;

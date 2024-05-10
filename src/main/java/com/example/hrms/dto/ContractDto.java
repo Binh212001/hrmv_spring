@@ -1,6 +1,7 @@
 package com.example.hrms.dto;
 
-import lombok.Value;
+import lombok.Builder;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -9,12 +10,16 @@ import java.time.LocalDate;
 /**
  * DTO for {@link com.example.hrms.entities.Contract}
  */
-@Value
+@Builder
+@Data
+
 public class ContractDto implements Serializable {
-    Integer id;
+    Long id;
+    String employeeName;
     String contractType;
     LocalDate startDate;
     LocalDate endDate;
     BigDecimal salary;
-    Integer hoursPerWeek;
+    Long hoursPerWeek;
+
 }

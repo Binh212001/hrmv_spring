@@ -1,15 +1,15 @@
 package com.example.hrms.dto;
 
-import lombok.Value;
+import lombok.Data;
 
 import java.io.Serializable;
 
 /**
  * DTO for {@link com.example.hrms.entities.Role}
  */
-@Value
+@Data
 public class RoleDto implements Serializable {
-    Integer id;
+    Long id;
     String roleName;
     String description;
 }

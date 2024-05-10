@@ -1,15 +1,17 @@
 package com.example.hrms.dto;
 
-import lombok.Value;
+import lombok.Builder;
+import lombok.Data;
 
 import java.io.Serializable;
 
 /**
  * DTO for {@link com.example.hrms.entities.Skill}
  */
-@Value
+@Data
+@Builder
 public class SkillDto implements Serializable {
-    Integer id;
+    Long id;
     String skillName;
     String description;
 }

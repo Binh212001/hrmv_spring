@@ -1,6 +1,6 @@
 package com.example.hrms.dto;
 
-import lombok.Value;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -9,10 +9,10 @@ import java.time.LocalDate;
 /**
  * DTO for {@link com.example.hrms.entities.Overtime}
  */
-@Value
+@Data
 public class OvertimeDto implements Serializable {
-    Integer id;
-    EmployeeDto employee;
+    Long id;
+    String employeeName;
     LocalDate date;
     BigDecimal hoursWorked;
     String reason;

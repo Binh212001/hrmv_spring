@@ -1,15 +1,13 @@
 package com.example.hrms.dto;
 
-import lombok.Value;
-
-import java.io.Serializable;
+import lombok.Data;
 
 /**
  * DTO for {@link com.example.hrms.entities.Department}
  */
-@Value
-public class DepartmentDto implements Serializable {
-    Integer id;
+@Data
+public class DepartmentDto  {
+    Long id;
     String departmentName;
     Integer managerId;
 }
