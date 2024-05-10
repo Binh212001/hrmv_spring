@@ -1,21 +1,13 @@
 package com.example.hrms.services;
 
-import com.example.hrms.dto.EmployeeDto;
 import com.example.hrms.form.EmployeeForm;
-
-import java.util.List;
+import com.example.hrms.utils.AddOutPut;
+import com.example.hrms.utils.GetOutput;
 
 public interface EmployeeService {
-    public List<EmployeeDto> getEmployees(Long role_id) throws Exception;
-    public  EmployeeDto ObjectToEmployeeDto(Object[] obj);
+    AddOutPut add(EmployeeForm employeeForm) throws Exception;
 
-    List<EmployeeDto> getEmployeeById(Long employeeId) throws Exception;
+    GetOutput getAll() throws Exception;
 
-    List<EmployeeDto> getEmployeeByFullName(String fullName)throws Exception;
-
-    List<EmployeeDto> getEmployeeAtDepartment(Long departmentId) throws Exception;
-
-    boolean create(EmployeeForm employeeForm) throws Exception;
-
-    boolean update(EmployeeForm employeeForm) throws  Exception;
+    GetOutput getEmployeeByDepartment(Long departmentId)throws Exception;
 }

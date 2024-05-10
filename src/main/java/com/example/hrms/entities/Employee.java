@@ -1,55 +1,73 @@
 package com.example.hrms.entities;
 
-import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import org.antlr.v4.runtime.misc.NotNull;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDate;
 
-
-@Entity
 @Getter
 @Setter
-public class Employee{
-
-
+@Entity
+@Table(name = "employee")
+public class Employee {
     @Id
+    @Column(name = "employee_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employeeId;
-    @Column(unique = true , nullable = false)
-    private  String username ;
-    @Column(nullable = false)
-    private  String password;
-    @Column(nullable = false)
-    private String firstName;
-    @Column(nullable = false)
-    private String lastName;
-    private String fullName;
+    private Long id;
+
+    @Column(name = "name", length = 100)
+    private String name;
+
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
+
+    @Column(name = "gender", length = 10)
     private String gender;
-    private Date dateOfBirth;
-    private Date hireDate;
-    private Long departmentId;
-    private Long positionId;
+
+    @Column(name = "contact_number", length = 20)
+    private String contactNumber;
+
+    @Column(name = "email", length = 100)
+    @NotNull
     private String email;
-    private String phoneNumber;
-    private String image;
 
+    @Column(name = "password", length = 100)
+    private String password;
 
-   @ManyToMany
-   @JoinTable(
-            name = "employee_role",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private List<Role> role;
-    @PrePersist
-    protected void onCreate() {
-        this.fullName= this.firstName+ " "+this.lastName;
-        this.password = this.username;
-    }
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "hire_date")
+    private LocalDate hireDate;
+
+    @Column(name = "termination_date")
+    private LocalDate terminationDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "position_id")
+    private Position position;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contract_id")
+    private Contract contract;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "skill_id")
+    private Skill skill;
 
 
 }
-

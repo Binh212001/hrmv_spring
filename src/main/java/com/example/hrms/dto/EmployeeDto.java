@@ -1,34 +1,33 @@
 package com.example.hrms.dto;
 
-import com.example.hrms.entities.ContactInformation;
-import com.example.hrms.entities.Contract;
-import com.example.hrms.entities.Role;
-import com.example.hrms.utils.BaseResponse;
-import lombok.AllArgsConstructor;
+import com.example.hrms.entities.Department;
+import com.example.hrms.entities.Position;
+import com.example.hrms.entities.Skill;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Value;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 
-import java.util.Date;
-import java.util.List;
-
-@Data
+/**
+ * DTO for {@link com.example.hrms.entities.Employee}
+ */
+@Getter
+@Setter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class EmployeeDto {
-    private Long employeeId;
-    private String firstName;
-    private String lastName;
-    private String gender;
-    private Date dateOfBirth;
-    private Date hireDate;
-    private Long departmentId;
-    private Long positionId;
-    private String email;
-    private String phoneNumber;
-    private  Long roleId;
-    private  String imageUrl;
-    private  String roleName;
+public class EmployeeDto implements Serializable {
+    Long id;
+    String name;
+    LocalDate dateOfBirth;
+    String gender;
+    String contactNumber;
+    String email;
+    String address;
+    LocalDate hireDate;
+    LocalDate terminationDate;
+    Department  department;
+    Position position;
+    Skill skill;
 }

@@ -10,27 +10,29 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "overtime")
-public class Overtime {
+@Table(name = "leave_table")
+public class LeaveTable {
     @Id
-    @Column(name = "overtime_id", nullable = false)
+    @Column(name = "leave_id", nullable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @Column(name = "date")
-    private LocalDate date;
+    @Column(name = "leave_type", length = 50)
+    private String leaveType;
 
-    @Column(name = "hours_worked", precision = 5, scale = 2)
-    private BigDecimal hoursWorked;
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
     @Column(name = "reason", length = Integer.MAX_VALUE)
     private String reason;

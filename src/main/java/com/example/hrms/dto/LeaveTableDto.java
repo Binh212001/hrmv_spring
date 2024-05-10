@@ -3,17 +3,17 @@ package com.example.hrms.dto;
 import lombok.Value;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
- * DTO for {@link com.example.hrms.entities.Overtime}
+ * DTO for {@link com.example.hrms.entities.LeaveTable}
  */
 @Value
-public class OvertimeDto implements Serializable {
+public class LeaveTableDto implements Serializable {
     Integer id;
     EmployeeDto employee;
-    LocalDate date;
-    BigDecimal hoursWorked;
+    String leaveType;
+    LocalDate startDate;
+    LocalDate endDate;
     String reason;
 }

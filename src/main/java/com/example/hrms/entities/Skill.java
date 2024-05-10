@@ -10,16 +10,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "department")
-public class Department {
+@Table(name = "skill")
+public class Skill {
     @Id
-    @Column(name = "department_id", nullable = false)
+    @Column(name = "skill_id", nullable = false)
     private Long id;
 
-    @Column(name = "department_name", length = 100)
-    private String departmentName;
+    @Column(name = "skill_name", length = 100)
+    private String skillName;
 
-    @Column(name = "manager_id")
-    private Long managerId;
+    @Column(name = "description", length = Integer.MAX_VALUE)
+    private String description;
 
 }
