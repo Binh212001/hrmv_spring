@@ -1,12 +1,6 @@
 package com.example.hrms.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,5 +28,16 @@ public class Overtime {
 
     @Column(name = "reason", length = Integer.MAX_VALUE)
     private String reason;
+
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", length = 20)
+    private  Status status;
+
+    @PrePersist
+    protected  void onCreate(){
+        this.status = Status.DRAFT;
+    }
+
 
 }

@@ -95,7 +95,7 @@ public class AttendanceServiceImpl implements AttendanceService{
             List<AttendanceListDto> dtoList =  objects.stream().map(a->new AttendanceListDto(
             (Long) a[0],(String) a[1],(BigDecimal) a[2], (BigDecimal) a[3])
             ).collect(Collectors.toList());
-            return new GetOutput("Danh sách cakip của nhân viên",200,dtoList);
+            return new GetOutput("Danh sách ca kip của nhân viên",200,dtoList);
         }catch (Exception e){
             throw  new Exception(e.getMessage());
         }
